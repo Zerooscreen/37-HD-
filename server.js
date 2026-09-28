@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require('path');
 const { tmdb, img, slugify } = require('./lib/tmdb');
-const { head, layout, posterCard, genreRow, trailerBlock, castGrid, similarGrid, watchButton, escapeHtml, movieJsonLd, tvJsonLd, sideBannerAd, nativeBannerAd, DEFAULT_TITLE, DEFAULT_DESC, SITE_NAME } = require('./lib/render');
+const { head, layout, posterCard, genreRow, trailerBlock, castGrid, similarGrid, watchButton, escapeHtml, movieJsonLd, tvJsonLd, sideBannerAd, DEFAULT_TITLE, DEFAULT_DESC, SITE_NAME } = require('./lib/render');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 const SITE_URL = process.env.SITE_URL || 'https://37hd.up.railway.app';
 
@@ -114,7 +114,6 @@ app.get('/watch/:type/:id', async (req, res) => {
     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:60vh; text-align:center; padding: 20px;">
       <h1 style="font-size: 1.8rem; margin-bottom: 15px; color: #fff;">กำลังพาคุณไปที่หน้า <span>${escapeHtml(title)}</span></h1>
       <p style="color: #aaa; margin-bottom: 25px;">กรุณารอสักครู่ ระบบกำลังเปลี่ยนเส้นทางใน <span id="countdown" style="color: #e50914; font-weight: bold; font-size: 1.5rem;">5</span> วินาที...</p>
-      ${nativeBannerAd()}
       <div style="margin-top: 20px;">
         <a id="direct-link" href="https://moviegate.bolt.host/th" class="watch-btn" style="text-decoration:none;">คลิกที่นี่หากรอนานเกินไป</a>
       </div>
@@ -180,7 +179,6 @@ app.get('/movie/:id/:slug?', async (req, res) => {
         </div>
       </div>
       <div class="section-block"><h3>เรื่องย่อ</h3><div class="bio-text">${escapeHtml(data.overview) || 'ยังไม่มีเรื่องย่อ'}</div></div>
-      ${nativeBannerAd()}
       <div class="section-block"><h3>ตัวอย่างหนัง</h3>${trailerBlock(videos)}</div>
       <div class="section-block"><h3>นักแสดง</h3>${castGrid(credits)}</div>
       <div class="section-block"><h3>หนังที่คล้ายกัน</h3>${similarGrid(similar.results, 'movie')}</div>
@@ -258,7 +256,6 @@ app.get('/tv/:id/:slug?', async (req, res) => {
         </div>
       </div>
       <div class="section-block"><h3>เรื่องย่อ</h3><div class="bio-text">${escapeHtml(data.overview) || 'ยังไม่มีเรื่องย่อ'}</div></div>
-      ${nativeBannerAd()}
       <div class="section-block"><h3>ตัวอย่างหนัง</h3>${trailerBlock(videos)}</div>
       <div class="section-block"><h3>นักแสดง</h3>${castGrid(credits)}</div>
       <div class="section-block">
@@ -305,7 +302,6 @@ app.get('/tv/:id/season/:season/episode/:episode', async (req, res) => {
     const totalEpInSeason = (seasonDetail.episodes || []).length;
     const isLastEpisode = parseInt(episode) === totalEpInSeason && isEnded;
 
-    // Menggunakan pemutar video embed eksternal (2embed) agar otomatis memutar video berdasarkan ID, season, dan episode
     const embedUrl = `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`;
 
     const bodyHtml = `
@@ -334,7 +330,6 @@ app.get('/tv/:id/season/:season/episode/:episode', async (req, res) => {
       </div>
 
       <div class="section-block"><h3>เรื่องย่อประจำตอน</h3><div class="bio-text">${escapeHtml(epData.overview) || 'ยังไม่มีเรื่องย่อสำหรับตอนนี้'}</div></div>
-      ${nativeBannerAd()}
     `;
 
     const headHtml = head({
