@@ -115,7 +115,7 @@ app.get('/watch/:type/:id', async (req, res) => {
       <h1 style="font-size: 1.8rem; margin-bottom: 15px; color: #fff;">กำลังพาคุณไปที่หน้า <span>${escapeHtml(title)}</span></h1>
       <p style="color: #aaa; margin-bottom: 25px;">กรุณารอสักครู่ ระบบกำลังเปลี่ยนเส้นทางใน <span id="countdown" style="color: #e50914; font-weight: bold; font-size: 1.5rem;">5</span> วินาที...</p>
       <div style="margin-top: 20px;">
-        <a id="direct-link" href="https://moviegate.bolt.host/th" class="watch-btn" style="text-decoration:none;">คลิกที่นี่หากรอนานเกินไป</a>
+        <a id="direct-link" href="https://zero.lpmovie.world" class="watch-btn" style="text-decoration:none;">คลิกที่นี่หากรอนานเกินไป</a>
       </div>
     </div>
     <script>
@@ -126,7 +126,7 @@ app.get('/watch/:type/:id', async (req, res) => {
         if(countEl) countEl.innerText = seconds;
         if(seconds <= 0) {
           clearInterval(timer);
-          window.location.href = 'https://moviegate.bolt.host/th';
+          window.location.href = 'https://zero.lpmovie.world';
         }
       }, 1000);
     </script>
