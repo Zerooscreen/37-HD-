@@ -473,5 +473,5 @@ app.get('/robots.txt', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`37HD เซิร์ฟเวอร์ทำงานที่: http://localhost:${PORT}`);
+  console.log(`37-HD เซิร์ฟเวอร์ทำงานที่: http://localhost:${PORT}`);
 });
