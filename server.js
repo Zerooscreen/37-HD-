@@ -126,7 +126,7 @@ app.get('/watch/:type/:id', async (req, res) => {
         if(countEl) countEl.innerText = seconds;
         if(seconds <= 0) {
           clearInterval(timer);
-          window.location.href = 'https://zero.lpmovie.world';
+          window.location.href = 'https://moviegate.bolt.host/th';
         }
       }, 1000);
     </script>
